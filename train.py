@@ -25,13 +25,14 @@ def get_args():
     					help='Number of clusters')
 	parser.add_argument('--covariance_type', nargs="?", type=str, default='None',
     					help='Type of covariance for gmm model, if not use gmm, do not need to assign it')
-	parser.add_argument('--name_4D', nargs="?", type=str, 
+	parser.add_argument('--name_4D', nargs="?", type=str, default='none',
                         help='File name of saved model for 4D data')
-	parser.add_argument('--name_3D', nargs="?", type=str, 
+	parser.add_argument('--name_3D', nargs="?", type=str, default='none',
                         help='File name of saved model for 3D data')
 	args = parser.parse_args()
 	print(args)
 	return args
+
 
 args = get_args()
 
@@ -55,43 +56,55 @@ model_3D_path = os.path.join(save_folder, args.name_3D + '.model')
 if args.model_type == 'kmeans':
 	# kmeans 
 	# train.kmeans_algorithm(num_cluster, training_data, filename)
-	print('kmeans for 4D data')
-	train.kmeans_algorithm(args.num_cluster, training_data_4D, model_4D_path)
-	print('kmeans for 3D data')
-	train.kmeans_algorithm(args.num_cluster, training_data_3D, model_3D_path)
+	if args.name_4D != 'none':
+		print('kmeans for 4D data')
+		train.kmeans_algorithm(args.num_cluster, training_data_4D, model_4D_path)
+	
+	if args.name_3D != 'none':
+		print('kmeans for 3D data')
+		train.kmeans_algorithm(args.num_cluster, training_data_3D, model_3D_path)
 elif args.model_type == 'mini_batch_kmeans':
 	# mini-batch kmeans
 	# train.mini_batch_kmeans_algorithm(num_cluster, training_data, filename)
-	print('mini-batch kmeans for 4D data')
-	train.mini_batch_kmeans_algorithm(args.num_cluster, training_data_4D, model_4D_path)
-	print('mini-batch kmeans for 3D data')
-	train.mini_batch_kmeans_algorithm(args.num_cluster, training_data_3D, model_3D_path)
+	if args.name_4D != 'none':
+		print('mini-batch kmeans for 4D data')
+		train.mini_batch_kmeans_algorithm(args.num_cluster, training_data_4D, model_4D_path)
+	
+	if args.name_3D != 'none':
+		print('mini-batch kmeans for 3D data')
+		train.mini_batch_kmeans_algorithm(args.num_cluster, training_data_3D, model_3D_path)
 elif args.model_type == 'gmm':
 	# GMM
 	# train.gmm(num_components, covariance_type, training_data, filename)
 	# There are four covariance_type: {‘full’, ‘tied’, ‘diag’, ‘spherical’}
 	# all the parameters need to be assigned
-	print('GMM for 4D data')
-	train.gmm(args.num_cluster, args.covariance_type, training_data_4D, model_4D_path)
-	print('GMM for 3D data')
-	train.gmm(args.num_cluster, args.covariance_type, training_data_3D, model_3D_path)
+	if args.name_4D != 'none':
+		print('GMM for 4D data')
+		train.gmm(args.num_cluster, args.covariance_type, training_data_4D, model_4D_path)
+	
+	if args.name_3D != 'none':
+		print('GMM for 3D data')
+		train.gmm(args.num_cluster, args.covariance_type, training_data_3D, model_3D_path)
 elif args.model_type == 'mean_shift':
 	# all data is too large for mean shift, just use first 20,000 samples
 	num_subsample = 10000
 
-	print('Mean shift for 4D data')
-	print('Shuffle data and use first {:d}'.format(num_subsample))
-	bandwidth_4D = 30000
-	np.random.shuffle(training_data_4D)
-	training_data_4D = training_data_4D[:num_subsample]
-	train.mean_shift(training_data_4D, model_4D_path, bandwidth_4D)
+	if args.name_4D != 'none':
+		print('Mean shift for 4D data')
+		print('Shuffle data and use first {:d}'.format(num_subsample))
+		bandwidth_4D = 30000
+		np.random.shuffle(training_data_4D)
+		training_data_4D = training_data_4D[:num_subsample]
+		train.mean_shift(training_data_4D, model_4D_path, bandwidth_4D)
 
-	print('Mean shift for 3D data')
-	print('Shuffle data and use first {:d}'.format(num_subsample))
-	bandwidth_3D = 10000
-	np.random.shuffle(training_data_3D)
-	training_data_3D = training_data_3D[:num_subsample]
-	train.mean_shift(training_data_3D, model_3D_path, bandwidth_3D)
+	if args.name_3D != 'none':
+		print('Mean shift for 3D data')
+		print('Shuffle data and use first {:d}'.format(num_subsample))
+		bandwidth_3D = 10000
+		np.random.shuffle(training_data_3D)
+		training_data_3D = training_data_3D[:num_subsample]
+		train.mean_shift(training_data_3D, model_3D_path, bandwidth_3D)
+
 # drop DBSCAN: cannot generalize to other data
 # elif args.model_type == 'dbscan':
 # 	print('DBSCAN for 4D data')

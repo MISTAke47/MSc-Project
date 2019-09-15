@@ -14,6 +14,8 @@ import module.features as features
 from joblib import load
 import argparse
 import time
+
+# these two lines to solve the bug reported on Mojave 10.14
 import matplotlib
 matplotlib.use('MacOSX')
 

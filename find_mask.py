@@ -13,6 +13,10 @@ import matplotlib.pyplot as plt
 import numpy as np
 import module.content as content
 
+# these two lines to solve the bug reported on Mojave 10.14
+import matplotlib
+matplotlib.use('MacOSX')
+
 # Set different centre to get different mask area
 centre = (700, 810)
 # Here, centre match the definition in image, but not match the definition in matrix

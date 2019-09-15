@@ -30,9 +30,9 @@ def get_args():
                         help='Sample begin from this timestamp')
     parser.add_argument('--end_slice', nargs="?", type=int, default=800, 
                         help='Sample end at this timestamp')
-    parser.add_argument('--filename_3D', nargs="?", type=str, default="training_data_3D_3x3_0025",
+    parser.add_argument('--filename_3D', nargs="?", type=str, default="training_data_3D",
                         help='File name of saved 3D feature')
-    parser.add_argument('--filename_4D', nargs="?", type=str, default="training_data_4D_3x3_0025",
+    parser.add_argument('--filename_4D', nargs="?", type=str, default="training_data_4D",
                         help='File name of saved 4D feature')
     parser.add_argument('--size', nargs="?", type=int, default=3,
                         help='Type of different size of the area')
@@ -42,18 +42,18 @@ def get_args():
     return args
 
 # set parameters
-# get argument from args function
-args = get_args()
 # set the parameter of mask here
 mask_centre = (700, 810)
 radius = 550
-# set the subsampling rate here
-# means, for each slice, we just randomly pick 1% points as training data
-subsampling_rate = 0.01
 # for locate target folder
 keyword = 'SHP'
+# set the subsampling rate here
+# sub sampling. We suggest set to make the total numpber of points being 2 millon
+subsampling_rate = 0.01
 
 
+# get argument from args function
+args = get_args()
 current_path = os.getcwd()
 all_timestamp = content.get_folder(current_path, keyword)
 # get the index for begin and end

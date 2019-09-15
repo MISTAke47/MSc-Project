@@ -14,6 +14,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 import module.content as content
+
+# these two lines to solve the bug reported on Mojave 10.14
 import matplotlib
 matplotlib.use('MacOSX')
 
@@ -63,10 +65,6 @@ def random_effective_area(masked_image):
 # transform the coordinate 
 def transform(coordinate, x_coordinate, y_coordinate, length):
 	transformed_coordinate = [(element[1]+x_coordinate-length, element[0]+y_coordinate-length) for element in coordinate]
-	# transformed_coordinate = []
-	# for element in coordinate:
-	# 	location = (element[1]+x_coordinate-100, element[0]+y_coordinate-100)
-	# 	transformed_coordinate.append(location)
 	return transformed_coordinate
 
 

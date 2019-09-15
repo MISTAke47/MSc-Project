@@ -43,6 +43,7 @@ validation_data_3D = []
 
 for element in data:
 	target_str = element.split()
+	# this command obtain the slice name and folder name
 	target_path = os.path.join(os.getcwd(), os.path.basename(os.path.dirname(target_str[0])), os.path.basename(target_str[0]))
 	# extract the path
 	target_class = int(target_str[-1])

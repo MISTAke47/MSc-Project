@@ -1,5 +1,6 @@
 '''
-This file will visualise the centre of the cluster
+This file will visualise the centre of the cluster as grayscale image
+used for interpretation
 
 Author: Yan Gao
 email: gaoy4477@gmail.com
@@ -8,7 +9,9 @@ import os
 import numpy as np 
 from joblib import load
 import argparse
-import matplotlib.pyplot as plt 
+import matplotlib.pyplot as plt
+
+# these two lines to solve the bug reported on Mojave 10.14
 import matplotlib
 matplotlib.use('MacOSX')
 

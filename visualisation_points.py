@@ -1,7 +1,7 @@
 '''
 This file will visualise the average grayscale value for pore and non-pore point
 load data from validation data
-
+used for interpretation
 
 Author: Yan Gao
 email: gaoy4477@gmail.com
@@ -11,6 +11,8 @@ import numpy as np
 import os
 import module.features as features
 import matplotlib.pyplot as plt 
+
+# these two lines to solve the bug reported on Mojave 10.14
 import matplotlib
 matplotlib.use('MacOSX')
 

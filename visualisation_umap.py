@@ -1,6 +1,7 @@
 '''
 This file will return the visualisation based on UMAP
 If we assign the centre from kmeans, it can show the location of the centre in the transformed space
+used for interpretation
 
 Author: Yan Gao
 email: gaoy4477@gmail.com
@@ -13,7 +14,10 @@ from mpl_toolkits.mplot3d import Axes3D
 import module.train as train
 from joblib import load
 
+# ignore the warning from umap
 import warnings
+
+# these two lines to solve the bug reported on Mojave 10.14
 import matplotlib
 matplotlib.use('MacOSX')
 

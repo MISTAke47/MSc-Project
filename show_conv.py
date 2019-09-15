@@ -14,7 +14,9 @@ import module.features as features
 from joblib import load
 import argparse
 import time
-import tensorflow as tf 
+import tensorflow as tf
+
+# these two lines to solve the bug reported on Mojave 10.14
 import matplotlib
 matplotlib.use('MacOSX')
 
